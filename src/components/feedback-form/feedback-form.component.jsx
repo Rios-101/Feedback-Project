@@ -53,7 +53,7 @@ const FeedbackForm = () => {
                return feedback.id === feedbackEdit.item.id ? {...feedback,...newFeedback}: feedback
             }))
          }else{
-            setFeedbackData([...feedbackData, newFeedback]);
+            setFeedbackData([ newFeedback,...feedbackData]);
          }
       }
       setText("")
