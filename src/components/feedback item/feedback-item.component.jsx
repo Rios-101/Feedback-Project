@@ -9,7 +9,8 @@ const FeedbackItem = ({ fbRating, fbText, feedbackData, fbId, feedback }) => {
    const { setFeedbackData, editFeedback } = useContext(FeedbackContext);
 
 
-   const remove = () => {
+   const remove =async () => {
+      await fetch(`http://localhost:5000/feedback/${fbId}`, {method:"DELETE"});
       const filter = feedbackData.filter( ele => ele.id !== fbId)
       setFeedbackData(filter)
    };

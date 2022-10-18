@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react"
 import RatingSelect from "../rating-select/rating-select.component"
 import Button from "../shared/button/button.component"
 import Card from "../shared/card/card.component"
-import { v4 as uuid } from "uuid"
 import { FeedbackContext } from "../../Context/feedback context/feedback-context"
 
 
@@ -38,22 +37,40 @@ const FeedbackForm = () => {
       setText(e.target.value);
    };
 
-   const submit = (e) => {
+   const submit = async (e) => {
       e.preventDefault();
 
+      
       if (text.length >= 11) {
          const newFeedback = {
-            id:uuid(),
             rating:rating,
             text:text
          };
 
+         // POST REQUEST
+         const res = await fetch("http://localhost:5000/feedback", {
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body: JSON.stringify(newFeedback)
+         })
+         const data = await res.json()
+
+         // PUT REQUEST FOR EDIT 
+         const resPut = await fetch(`http://localhost:5000/feedback/${feedbackEdit.item.id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newFeedback),
+         });
+         const dataPut = await resPut.json();
+
+
+         
          if(feedbackEdit.edit === true){
             setFeedbackData(feedbackData.map(feedback=>{
-               return feedback.id === feedbackEdit.item.id ? {...feedback,...newFeedback}: feedback
+               return feedback.id === feedbackEdit.item.id ? {...feedback,...dataPut}: feedback
             }))
          }else{
-            setFeedbackData([ newFeedback,...feedbackData]);
+            setFeedbackData([ data,...feedbackData]);
          }
       }
       setText("")
