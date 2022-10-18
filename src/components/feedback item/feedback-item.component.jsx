@@ -1,7 +1,7 @@
 import { useContext } from "react"
-import {FaEdit, FaTimes} from "react-icons/fa"
 import Card from "../../components/shared/card/card.component"
 import { FeedbackContext } from "../../Context/feedback context/feedback-context";
+import "./feedback-item.style.css"
 
 
 const FeedbackItem = ({ fbRating, fbText, feedbackData, fbId, feedback }) => {
@@ -25,12 +25,12 @@ const FeedbackItem = ({ fbRating, fbText, feedbackData, fbId, feedback }) => {
       <Card className="card">
          <div className="num-display">{fbRating}</div>
          <button onClick={remove} className="close">
-            <FaTimes color="purple" />
+            <i className="fas fa-times purple"></i>
          </button>
          <button onClick={edit} className="edit">
-            <FaEdit color="purple" />
+            <i className="fas fa-edit purple"></i>
          </button>
-         
+
          <div className="text-display">{fbText}</div>
       </Card>
    );
