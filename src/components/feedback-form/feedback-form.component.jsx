@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react"
+import { v4 as uuid } from "uuid";
 import RatingSelect from "../rating-select/rating-select.component"
 import Button from "../shared/button/button.component"
 import Card from "../shared/card/card.component"
@@ -43,34 +44,37 @@ const FeedbackForm = () => {
       
       if (text.length >= 11) {
          const newFeedback = {
+            id:uuid(),
             rating:rating,
             text:text
          };
 
          // POST REQUEST
-         const res = await fetch("http://localhost:5000/feedback", {
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body: JSON.stringify(newFeedback)
-         })
-         const data = await res.json()
+         // const res = await fetch("http://localhost:5000/feedback", {
+         //    method:"POST",
+         //    headers:{"Content-Type":"application/json"},
+         //    body: JSON.stringify(newFeedback)
+         // })
+         // const data = await res.json()
 
          // PUT REQUEST FOR EDIT 
-         const resPut = await fetch(`http://localhost:5000/feedback/${feedbackEdit.item.id}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(newFeedback),
-         });
-         const dataPut = await resPut.json();
+         // const resPut = await fetch(`http://localhost:5000/feedback/${feedbackEdit.item.id}`, {
+         //    method: "PUT",
+         //    headers: { "Content-Type": "application/json" },
+         //    body: JSON.stringify(newFeedback),
+         // });
+         // const dataPut = await resPut.json();
 
 
          
          if(feedbackEdit.edit === true){
             setFeedbackData(feedbackData.map(feedback=>{
-               return feedback.id === feedbackEdit.item.id ? {...feedback,...dataPut}: feedback
+               return feedback.id === feedbackEdit.item.id ? {...feedback,...newFeedback}: feedback
+               // return feedback.id === feedbackEdit.item.id ? {...feedback,...dataPut}: feedback
             }))
          }else{
-            setFeedbackData([ data,...feedbackData]);
+            setFeedbackData([ newFeedback,...feedbackData]);
+            // setFeedbackData([ data,...feedbackData]);
          }
       }
       setText("")

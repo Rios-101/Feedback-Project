@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { createContext, useState } from "react";
 import FeedbackData from "../../data/Feedback-Data";
 
@@ -10,7 +10,7 @@ export const FeedbackContext = createContext({
 
 
 export const FeedbackProvider = ({children})=>{
-   const [isLoading, setIsLoading] = useState(true)
+   // const [isLoading, setIsLoading] = useState(true)
    const [feedbackData,setFeedbackData] = useState(FeedbackData)
    const [feedbackEdit, setFeedbackEdit] = useState({
       item:{},
@@ -18,15 +18,15 @@ export const FeedbackProvider = ({children})=>{
    }) 
 
 
-   useEffect(() => {
-      const data = async ()=>{
-         const res = await fetch("http://localhost:5000/feedback");
-         const test = await res.json()
-         setFeedbackData(test);
-         setIsLoading(false)
-      }
-      data()
-   }, []);
+   // useEffect(() => {
+   //    const data = async ()=>{
+   //       const res = await fetch("http://localhost:5000/feedback");
+   //       const test = await res.json()
+   //       setFeedbackData(test);
+   //       setIsLoading(false)
+   //    }
+   //    data()
+   // }, []);
 
    
 
@@ -43,7 +43,8 @@ export const FeedbackProvider = ({children})=>{
    //    setFeedbackData(filter)
    // };
 
-   const value = {feedbackData,setFeedbackData,feedbackEdit,editFeedback, isLoading}
+   // const value = {feedbackData,setFeedbackData,feedbackEdit,editFeedback, isLoading}
+   const value = {feedbackData,setFeedbackData,feedbackEdit,editFeedback}
 
    return <FeedbackContext.Provider value={value}>{children}</FeedbackContext.Provider>
 }

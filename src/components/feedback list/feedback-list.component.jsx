@@ -9,7 +9,8 @@ const FeedbackList = ()=>{
 
    const {feedbackData,isLoading} = useContext(FeedbackContext)
 
-   if(!isLoading && (!feedbackData || feedbackData.length ===0)){
+   // if(!isLoading && (!feedbackData || feedbackData.length ===0)){
+   if(!feedbackData || feedbackData.length ===0){
       return(
          <div>
             <h3>No Feedback </h3>
