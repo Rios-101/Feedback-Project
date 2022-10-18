@@ -1,4 +1,3 @@
-import { FaQuestion } from "react-icons/fa"
 import { Link } from "react-router-dom"
 
 
@@ -8,7 +7,7 @@ const AboutIconLink = ()=>{
    return (
       <div className="about-link">
          <Link to={"/about"}>
-            <FaQuestion size={30} />
+            <i size={30} className="fas fa-question fa-2x"></i>
          </Link>
       </div>
    );
